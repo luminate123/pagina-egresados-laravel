@@ -19,7 +19,7 @@
         <div class="flex justify-center items-center h-screen bg-slate-200">
             <div class="flex flex-col items-center justify-center">
                 <div class='Titule flex flex-col items-center justify-center mb-5 font-serif'>
-                    <p class='text-2xl '>Bienvenido Ex-Alumnos</p>
+                    <p class='text-2xl '>Bienvenido Egresados</p>
                     <div class='subtitule'>
                         Ingrese sus datos para acceder a la plataforma
                     </div>
@@ -45,8 +45,8 @@
                     </div>
                 </div>
                 <div class='buttons mt-8 flex gap-4'>
-                    <Button as={Link} href='/' class='bg-blue-700 text-white'>Ingresar</Button>
-                    <Button as={Link} href='/registro' class='bg-yellow-600 text-white'>Registrarme</Button>
+                    <a class="button bg-blue-700 text-white rounded-md px-3 py-1.5 text-sm font-semibold leading- shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="/">Inicia Sesión</a>
+                    <a class="button bg-yellow-600 text-white rounded-md px-3 py-1.5 text-sm font-semibold leading- shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600" href="/registro">Registrate</a>
                 </div>
             </div>
         </div>
