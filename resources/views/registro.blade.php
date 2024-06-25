@@ -8,8 +8,7 @@
     <title>Document</title>
 </head>
 
-<body>
-
+<body class="bg-white">
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-20 w-auto" src="/logoUNT.png" alt="Your Company">
@@ -21,7 +20,7 @@
                 <div class="grid">
                     <label for="dni" class="block text-sm font-medium leading-6 text-gray-900">Ingrese su dni</label>
                     <div class="relative mt-2">
-                        <input id="dni" name="dni" type="text" required maxlength="8" class="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <input id="dni" name="dni" type="text" required maxlength="8" class="bg-white block w-full pl-3 rounded-md border-0 py-1.5 text-sky-800 shadow-sm ring-1 ring-insetfocus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         <div id="loading" class="absolute inset-y-0 right-5 flex items-center hidden">
                             <div class="border-gray-300 h-6 w-6 animate-spin rounded-full border-4 border-t-blue-600" role="status"></div>
                         </div>
@@ -32,19 +31,19 @@
                     <div class="grid">
                         <label for="Nombres" class="block text-sm font-medium leading-6 text-gray-900">Nombres</label>
                         <div class="mt-2">
-                            <input id="Nombres" name="Nombres" disabled type="text" placeholder="" required class="block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input id="Nombres" name="Nombres" disabled type="text" placeholder="" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div class="grid">
                         <label for="ApellidoPaterno" class="block text-sm font-medium leading-6 text-gray-900">Apellido Paterno</label>
                         <div class="mt-2">
-                            <input id="ApellidoPaterno" name="ApellidoPaterno" disabled type="text" placeholder="" required class="block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input id="ApellidoPaterno" name="ApellidoPaterno" disabled type="text" placeholder="" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div class="grid mt-6">
                         <label for="ApellidoMaterno" class="block text-sm font-medium leading-6 text-gray-900">Apellido Materno</label>
                         <div class="mt-2">
-                            <input id="ApellidoMaterno" name="ApellidoMaterno" disabled type="text" placeholder="" required class="block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input id="ApellidoMaterno" name="ApellidoMaterno" disabled type="text" placeholder="" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                 </div>
@@ -80,6 +79,7 @@
                     fetch(`/consulta-dni/${dni}`)
                         .then(response => {
                             if (!response.ok) {
+                                console.log(response);
                                 throw new Error('Respuesta de red no fue ok.');
                             }
                             return response.json();
