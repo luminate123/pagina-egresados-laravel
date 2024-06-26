@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
-
 class usuariosController extends Controller
 {
     public function index()
@@ -27,9 +26,13 @@ class usuariosController extends Controller
 
     public function store(Request $request)
     {
+        // Asignar valor predeterminado 'user' al role si no se proporciona
+        $role = $request->input('role', 'user');
+
         $validator = Validator::make(
             $request->all(),
             [
+                'role' => 'in:user,admin', // Validar rol, pero no requerirlo
                 'nombres' => 'required|max:255',
                 'Apellido_Paterno' => 'required|max:255',
                 'Apellido_Materno' => 'required|max:255',
@@ -45,6 +48,7 @@ class usuariosController extends Controller
         }
 
         $usuario = Usuario::create([
+            'role' => $role,
             'nombres' => $request->nombres,
             'Apellido_Paterno' => $request->Apellido_Paterno,
             'Apellido_Materno' => $request->Apellido_Materno,
@@ -55,11 +59,9 @@ class usuariosController extends Controller
         if (!$usuario) {
             return response()->json([
                 'message' => 'Error al crear el usuario',
-                'errors' => $validator->errors(),
             ], 500);
         }
 
         return response()->json(['message' => 'Usuario creado correctamente'], 201);
     }
-
 }

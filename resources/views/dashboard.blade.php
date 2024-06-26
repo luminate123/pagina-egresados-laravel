@@ -1,4 +1,8 @@
 <x-layout>
+    @if (Auth::user()->role == 'admin')
+    <!-- Contenido solo para administradores -->
+    <p>Bienvenido, administrador.</p>
+    @else
     Noticias
     <div class="card lg:card-side bg-base-100 shadow-xl h-36">
         <figure>
@@ -9,8 +13,9 @@
             <p>Click the button to listen on Spotiwhy app.</p>
             <div class="card-actions justify-end">
                 <button class="btn btn-primary">Listen</button>
-                
+
             </div>
         </div>
     </div>
+    @endif
 </x-layout>
