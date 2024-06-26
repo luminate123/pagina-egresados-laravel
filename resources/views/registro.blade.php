@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 
-<body class="bg-white">
+<body class="bg-white h-screen">
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-20 w-auto" src="/logoUNT.png" alt="Your Company">
@@ -54,7 +54,7 @@
             </form>
 
             <p class="mt-10 text-center text-sm text-gray-500">
-               ¿Ya tienes una cuenta?
+                ¿Ya tienes una cuenta?
                 <a href="/" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Iniciar Sesión</a>
             </p>
         </div>
@@ -71,7 +71,6 @@
             dniInput.addEventListener('input', function() {
                 const dni = this.value;
                 if (dni.length === 8) {
-                    // Mostrar el indicador de carga y deshabilitar el campo de entrada
                     loadingIndicator.classList.remove('hidden');
                     dniInput.disabled = true;
                     submitBtn.disabled = true;
@@ -85,29 +84,26 @@
                             return response.json();
                         })
                         .then(data => {
-                            // Asegurarse de que los elementos existan antes de asignar valores
                             const nombresInput = document.getElementById('Nombres');
                             const apellidoPaternoInput = document.getElementById('ApellidoPaterno');
                             const apellidoMaternoInput = document.getElementById('ApellidoMaterno');
                             if (nombresInput && data.nombres) {
                                 nombresInput.value = data.nombres;
-                                nombresInput.disabled = false; // Habilitar el campo si estaba deshabilitado
+                                nombresInput.disabled = false;
                             }
                             if (apellidoPaternoInput && data.apellidoPaterno) {
                                 apellidoPaternoInput.value = data.apellidoPaterno;
-                                apellidoPaternoInput.disabled = false; // Habilitar el campo si estaba deshabilitado
+                                apellidoPaternoInput.disabled = false;
                             }
                             if (apellidoMaternoInput && data.apellidoMaterno) {
                                 apellidoMaternoInput.value = data.apellidoMaterno;
-                                apellidoMaternoInput.disabled = false; // Habilitar el campo si estaba deshabilitado
+                                apellidoMaternoInput.disabled = false;
                             }
                         })
                         .catch(error => {
                             console.error('Error al obtener los datos:', error);
-                            // Considerar mostrar un mensaje de error al usuario aquí
                         })
                         .finally(() => {
-                            // Ocultar el indicador de carga y habilitar el campo de entrada
                             loadingIndicator.classList.add('hidden');
                             dniInput.disabled = false;
                             submitBtn.disabled = false;
@@ -117,28 +113,38 @@
         }
 
         form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
+            event.preventDefault();
+            
+            const dni = document.getElementById('dni').value;
+            const nombres = document.getElementById('Nombres').value;
+            const apellidoPaterno = document.getElementById('ApellidoPaterno').value;
+            const apellidoMaterno = document.getElementById('ApellidoMaterno').value;
 
-            const formData = new FormData(form);
-
-            fetch('/registro', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la solicitud');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Registro exitoso:', data);
-                // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
-            })
-            .catch(error => {
-                console.error('Error al registrar:', error);
-                // Aquí puedes mostrar un mensaje de error al usuario
-            });
+            const data = {
+                DNI: dni,
+                nombres: nombres,
+                Apellido_Paterno: apellidoPaterno,
+                Apellido_Materno: apellidoMaterno
+            };
+            fetch('/api/usuarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la solicitud');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Registro exitoso:', data);
+                })
+                .catch(error => {
+                    console.error('Error al registrar:', error);
+                });
         });
     });
 </script>
