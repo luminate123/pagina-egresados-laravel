@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>Egresados Ingreso</title>
 </head>
 
 <body>
@@ -14,13 +14,13 @@
         <main class="grid grid-cols-2">
             <div class="flex justify-center items-center h-screen bg-blue-900">
                 <div class="flex flex-col items-center justify-center mx-16">
-                    <img src="/logoUNT.png" alt="Logo" width={400} height={400} />
+                    <img src="/logoUNT.png" alt="Logo Universidad Nacional de Trujillo" width={400} height={400} />
                     <h1 class='font-serif text-4xl text-center text-white'>UNIVERSIDAD NACIONAL DE TRUJILLO</h1>
                 </div>
             </div>
-            <div class="flex justify-center items-center h-screen bg-slate-200">
+            <div class="flex justify-center items-center h-screen bg-white">
                 <div class="flex flex-col items-center justify-center">
-                    <div class='Titule flex flex-col items-center justify-center mb-5 font-serif'>
+                    <div class='titule flex flex-col items-center justify-center mb-5 font-serif'>
                         <p class='text-2xl text-gray-950'>Bienvenido Egresados</p>
                         <div class='subtitule text-gray-950'>
                             Ingrese sus datos para acceder a la plataforma

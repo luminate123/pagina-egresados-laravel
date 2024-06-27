@@ -13,6 +13,10 @@ Route::get('/registro', function () {
     return view('registro');
 });
 
+Route::get('/registroNew', function () {
+    return view('registroNew');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
@@ -20,6 +24,20 @@ Route::get('/dashboard', function () {
 Route::get('/perfil', function () {
     return view('perfil');
 })->middleware('auth');
+
+Route::get('/perfilNew', function () {
+    return view('perfilNew');
+});
+Route::get('/perfilNew/DatosPersonales', function () {
+    return view('perfilNewDatosPersonales');
+});
+Route::get('/perfilNew/DatosAcademicos', function () {
+    return view('perfilNewDatosAcademicos');
+});
+Route::get('/perfilNew/DatosProfesionales', function () {
+    return view('perfilNewDatosProfesionales');
+});
+
 
 Route::get('/empleos', function () {
     return view('empleos');

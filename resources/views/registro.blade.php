@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>Egresados Registro</title>
 </head>
 
 <body class="bg-white h-screen">
@@ -18,7 +18,7 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form class="space-y-6" method="POST" id="dniForm">
                 <div class="grid">
-                    <label for="dni" class="block text-sm font-medium leading-6 text-gray-900">Ingrese su dni</label>
+                    <label for="dni" class="block text-sm font-medium leading-6 text-gray-900">Ingrese su DNI</label>
                     <div class="relative mt-2">
                         <input id="dni" name="dni" type="text" required maxlength="8" class="bg-white block w-full pl-3 rounded-md border-0 py-1.5 text-sky-800 shadow-sm ring-1 ring-insetfocus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         <div id="loading" class="absolute inset-y-0 right-5 flex items-center hidden">

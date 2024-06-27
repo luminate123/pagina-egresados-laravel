@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>Inicio</title>
 </head>
 
 <body class="flex flex-col min-h-screen">
     <header>
         <nav class="navbar bg-blue-600">
             <div class="flex-1 justify-items-center">
-                <a class="btn btn-ghost text-xl">
+                <a class="btn btn-ghost text-3xl text-white">
                     <img src="/logoUNT.png" class="w-15 h-10" />
                     Escuela de Ingenieria Informatica
                 </a>
             </div>
             <div class="flex-none">
-                <p class="text-white">{{ Auth::user()->nombres }}</p>
+                <p class="text-white">Usuario</p>
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar mr-5">
                         <div class="w-10 rounded-full">

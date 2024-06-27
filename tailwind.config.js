@@ -7,7 +7,22 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        blueUNT: {
+          DEFAULT: '#12377B',
+          light: '#2563ea',
+        },
+        yellowUNT: {
+          DEFAULT: '#E6AD09',
+          light: '#FACC47',
+        },
+        primary: {
+          DEFAULT: '#12377B',
+          light: '#2563ea',
+        },
+      },
+    },
   },
   plugins: [require('daisyui')],
   daisyui: {
