@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReniecController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\EnsureTokenIsValid;
+use App\Http\Controllers\empleosController;
+use App\Http\Controllers\perfilController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,14 +19,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
 
-Route::get('/perfil', function () {
-    return view('perfil');
-})->middleware('auth');
 
-Route::get('/empleos', function () {
-    return view('empleos');
-})->middleware('auth');
+Route::get('/perfil/{id}', [perfilController::class,'show'])->middleware('auth');
 
+Route::get('/empleos', [empleosController::class, 'index'])->middleware('auth');
 
 
 Route::post('login', function () {
@@ -35,6 +33,19 @@ Route::post('login', function () {
     }
     return redirect('/');
 });
+
+
+Route::post('registroempleo', function () {
+    $empleo = new App\Models\Empleo();
+    $empleo->titulo = request()->title;
+    $empleo->descripcion = request()->description;
+    $empleo->link = request()->link;
+    $empleo->fecha_publicacion = now(); // Set the current date and time
+    $empleo->save();
+    return redirect('/empleos');
+});
+
+
 
 Route::post('logout', function () {
     Auth::logout();

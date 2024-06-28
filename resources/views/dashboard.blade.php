@@ -2,6 +2,8 @@
     @if (Auth::user()->role == 'admin')
     <!-- Contenido solo para administradores -->
     <p>Bienvenido, administrador.</p>
+    <x-formEmpleo>
+    </x-formEmpleo>
     @else
     Noticias
     <div class="card lg:card-side bg-base-100 shadow-xl h-36">
@@ -13,7 +15,6 @@
             <p>Click the button to listen on Spotiwhy app.</p>
             <div class="card-actions justify-end">
                 <button class="btn btn-primary">Listen</button>
-
             </div>
         </div>
     </div>

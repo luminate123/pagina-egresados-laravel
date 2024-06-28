@@ -1,16 +1,18 @@
 <x-layout>
-    Empleos
-
-    <div class="card card-side  bg-base-100 shadow-xl mt-10 h-36 rounded-lg border-solid border-2 border-base-500">
-        <figure>
-            <img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" />
-        </figure>
-        <div class="card-body p-4 ">
-            <h2 class="card-title">New movie is released!</h2>
-            <p>Click the button to watch on Jetflix app.</p>
-            <div class="card-actions justify-end">
-                <button class="btn btn-primary">Watch</button>
-            </div>
-        </div>
+    <h1>Empleos</h1>
+    <div class="flex flex-wrap justify-start">
+        @if($empleos->isEmpty())
+        <p>No hay empleos registrados</p>
+        @else
+        @foreach ($empleos as $empleo)
+        <x-card>
+            <x-slot:titulo>{{$empleo->titulo}}</x-slot:titulo>
+            <x-slot:descripcion>{{$empleo->descripcion}}</x-slot:descripcion>
+            <x-slot:fecha_publicacion>{{ \Carbon\Carbon::parse($empleo->fecha_publicacion)->format('d/m/Y') }}</x-slot:fecha_publicacion>
+            <x-slot:link>{{$empleo->link}}</x-slot:link>
+        </x-card>
+        @endforeach
+        @endif
     </div>
+
 </x-layout>

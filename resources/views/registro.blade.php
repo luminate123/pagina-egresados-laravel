@@ -16,6 +16,7 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            @csrf
             <form class="space-y-6" method="POST" id="dniForm">
                 <div class="grid">
                     <label for="dni" class="block text-sm font-medium leading-6 text-gray-900">Ingrese su dni</label>
@@ -114,7 +115,7 @@
 
         form.addEventListener('submit', function(event) {
             event.preventDefault();
-            
+
             const dni = document.getElementById('dni').value;
             const nombres = document.getElementById('Nombres').value;
             const apellidoPaterno = document.getElementById('ApellidoPaterno').value;
