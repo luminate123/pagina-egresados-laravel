@@ -59,9 +59,13 @@ class usuariosController extends Controller
         if (!$usuario) {
             return response()->json([
                 'message' => 'Error al crear el usuario',
+                'status' => 'error',
             ], 500);
         }
+        //status
 
-        return response()->json(['message' => 'Usuario creado correctamente'], 201);
+        return response()->json(['message' => 'Operación exitosa', 'status' => 'success']);
+        //un toast que indique se creo correctamente
+
     }
 }

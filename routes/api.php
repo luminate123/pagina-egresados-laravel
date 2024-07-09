@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\curriculumsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\perfilController;
 use App\Http\Controllers\usuariosController;
 use App\Http\Controllers\empleosController;
+use App\Http\Controllers\datos_academicosController;
+use App\Http\Controllers\datos_profesionalesController;
+use App\Http\Controllers\certificadoController;
 
 Route::get('/usuarios', [usuariosController::class, 'index']);
 
@@ -14,6 +18,7 @@ Route::get('/usuarios/{id}', function () {
 
 
 Route::post('/usuarios', [usuariosController::class, 'store']);
+
 
 Route::patch('/usuarios/{id}', function () {
     return 'Actualizando';
@@ -30,20 +35,29 @@ Route::get('/empleos', [empleosController::class, 'index']);
 Route::get('/empleos/{id}', function () {
     return 'Obteniendo un empleo';
 });
-Route::post('/empleos', [empleosController::class, 'store']);
-
-Route::patch('/empleos/{id}', function () {
-    return 'Actualizando';
-});
-
-Route::delete('/empleos/{id}', function () {
-    return 'Eliminando empleo';
-});
+Route::post('/registroempleo', [empleosController::class, 'store']);
 
 
-Route::get('/perfil/{id}', [perfilController::class,'show']);
 
-Route::post('/perfil', [perfilController::class,'store']);
-    
+
+//perfil
+
+
+
+
+
+
+// api.php
+
+
+
+
+
+Route::post('/curriculums/{id}', [curriculumsController::class, 'upload'])->name('curriculums.upload');
+
+Route::patch('/actcurriculums/{id}', [curriculumsController::class, 'upload'])->name('actcurriculums.upload');
+
+Route::delete('/delcurriculums/{id}', [curriculumsController::class, 'deleteFile'])->name('curriculums.deleteFile');
+
 
 

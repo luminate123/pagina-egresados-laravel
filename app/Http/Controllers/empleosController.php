@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Empleo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 
 class empleosController extends Controller
 {
@@ -13,12 +12,7 @@ class empleosController extends Controller
     {
         $empleos = Empleo::all();
 
-        $data = [
-            'empleos' => $empleos,
-            'status' => 200
-        ];
         return view('empleos', ['empleos' => $empleos]);
-        return response()->json($data, 200);
     }
 
     public function store(Request $request)
@@ -28,31 +22,26 @@ class empleosController extends Controller
             [
                 'titulo' => 'required|max:255',
                 'descripcion' => 'required',
-                'fecha_publicacion' => 'required|date',
                 'link' => 'required|url',
+                'fecha_publicacion' => 'nullable|date', // Make it nullable if not mandatory
             ]
         );
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Datos incorrectos',
-                'errors' => $validator->errors(),
-            ], 400);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $empleo = Empleo::create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
-            'fecha_publicacion' => $request->fecha_publicacion,
             'link' => $request->link,
+            'fecha_publicacion' => $request->fecha_publicacion ?? now(), // Use current date if not provided
         ]);
 
         if (!$empleo) {
-            return response()->json([
-                'message' => 'Error al crear el empleo',
-            ], 500);
+            return redirect()->back()->with('error', 'Error al crear el empleo');
         }
 
-        return response()->json(['message' => 'Empleo creado correctamente'], 201);
+        return redirect()->route('empleos.index')->with('success', 'Empleo creado correctamente');
     }
 }

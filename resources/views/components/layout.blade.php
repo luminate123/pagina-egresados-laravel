@@ -4,26 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../path/to/src/pagedone.css" />
     @vite('resources/css/app.css')
     <title>Document</title>
 </head>
 
 <body class="flex flex-col min-h-screen">
-    <header class="fixed top-0 left-0 w-full z-10">
-        <nav class="navbar bg-blue-600">
+    <header class=" top-0 left-0 w-full">
+        <nav class=" fixed navbar bg-blue-600 z-50">
             <div class="flex-1 justify-items-center">
                 <a class="btn btn-ghost text-xl">
                     <img src="/logoUNT.png" class="w-15 h-10" />
                     Escuela de Ingenieria Informatica
                 </a>
             </div>
-            <div class="flex-none">
-                <p class="text-white">{{ Auth::user()->nombres }}</p>
-                <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar mr-5">
-                        <div class="w-10 rounded-full">
-                            <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                        </div>
+            <div class="flex-none ">
+                <p class="text-white">{{ Auth::user()->nombres }} {{ Auth::user()->Apellido_Materno }} {{ Auth::user()->Apellido_Paterno }}</p>
+                <div class="avatar placeholder mr-10 ml-6">
+                    <div class="bg-neutral text-neutral-content w-12 rounded-full">
+                        <span>
+                            {{ collect(explode(' ', Auth::user()->nombres))->map(function($name) { return $name[0]; })->implode('') }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -73,7 +74,7 @@
                         </li>
                         @if (Auth::user()->role == 'admin')
                         <li>
-                            <a href="/perfil" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 pr-6 {{ Request::is('perfil') ? 'border-indigo-500' : 'border-transparent ' }}">
+                            <a href="/perfiles" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 pr-6 {{ Request::is('perfil') ? 'border-indigo-500' : 'border-transparent ' }}">
                                 <span class="inline-flex justify-center items-center ml-4">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -85,7 +86,8 @@
 
                         @else
                         <li>
-                            <a href="/perfil/{{ auth()->user()->id }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 pr-6 {{ Request::is('perfil/*') ? 'border-indigo-500' : 'border-transparent ' }}">
+
+                            <a href="/perfil/{{Auth::user()->id }}  " class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 pr-6 {{ Request::is('perfil/*') ? 'border-indigo-500' : 'border-transparent ' }}">
                                 <span class="inline-flex justify-center items-center ml-4">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>

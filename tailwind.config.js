@@ -7,11 +7,15 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      zIndex: {
+        '500': '500',
+      }
+    },
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ["light", "dark", "cupcake"],
+    themes: ["light"],
   },
 }
 

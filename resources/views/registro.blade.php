@@ -58,10 +58,24 @@
                 ¿Ya tienes una cuenta?
                 <a href="/" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Iniciar Sesión</a>
             </p>
+
+            <x-toast>
+            </x-toast>
         </div>
     </div>
 </body>
 <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('[data-dismiss-target]').forEach((button) => {
+            button.addEventListener('click', function() {
+                const target = document.querySelector(this.getAttribute('data-dismiss-target'));
+                if (target) {
+                    target.style.display = 'none';
+                }
+            });
+        });
+    });
+
     document.addEventListener('DOMContentLoaded', function() {
         const dniInput = document.getElementById('dni');
         const submitBtn = document.getElementById('submitBtn');
@@ -142,10 +156,31 @@
                 })
                 .then(data => {
                     console.log('Registro exitoso:', data);
+                    if (data.status === "success") {
+                        showToast();
+                    }
                 })
                 .catch(error => {
                     console.error('Error al registrar:', error);
+                    showToasterror();
                 });
+
+            function showToast() {
+                const toast = document.getElementById('toast-success');
+                toast.style.display = 'flex'; // Mostrar el toast
+                setTimeout(() => {
+                    toast.style.display = 'none'; // Ocultar el toast después de 3 segundos
+                }, 3000);
+            }
+
+            function showToasterror() {
+                const toast = document.getElementById('toast-danger');
+                toast.style.display = 'flex'; // Mostrar el toast
+                setTimeout(() => {
+                    toast.style.display = 'none'; // Ocultar el toast después de 3 segundos
+                }, 3000);
+            }
+
         });
     });
 </script>
