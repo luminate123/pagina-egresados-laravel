@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_usuario'); // Agrega esta línea
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->string('situacion_laboral');
+            $table->string('situacion_laboral')->nullable();
             $table->string('empresa_actual')->nullable();
             $table->string('puesto_actual')->nullable();
             $table->string('sector_empresa_actual')->nullable();
             $table->string('redes_sociales')->nullable();
-            $table->unsignedBigInteger('curriculum'); // Asegúrate de que el tipo de dato coincida con el tipo de la clave primaria de la tabla referenciada
+            $table->unsignedBigInteger('curriculum')->nullable() ; // Asegúrate de que el tipo de dato coincida con el tipo de la clave primaria de la tabla referenciada
             $table->foreign('curriculum')->references('id')->on('curriculums')->onDelete('cascade');
             $table->timestamps();
         });

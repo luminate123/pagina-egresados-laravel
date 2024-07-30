@@ -14,7 +14,7 @@ class Empleo extends Model
     protected $fillable = [
         'titulo',
         'descripcion',
-        'fecha_publicacion',
+        'imagen',
         'link',
     ]; 
 }

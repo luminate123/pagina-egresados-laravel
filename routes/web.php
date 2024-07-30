@@ -8,29 +8,36 @@ use App\Http\Controllers\perfilController;
 use App\Http\Controllers\datos_academicosController;
 use App\Http\Controllers\datos_profesionalesController;
 use App\Http\Controllers\certificadoController;
+use App\Http\Controllers\usuariosController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/registro', function () {
-    return view('registro');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
 
 
+Route::get('/registro', [usuariosController::class, 'show'])->name('usuarios.show');
+Route::post('/guardarregistro', [usuariosController::class, 'store'])->name('usuarios.store');
 
 
 
 Route::get('/empleos', [empleosController::class, 'index'])->name('empleos.index')->middleware('auth');
 
+Route::post('/registroempleo', [empleosController::class, 'store'])->name('empleos.store')->middleware('admin');
 
 
+Route::get('/perfiles', [perfilController::class, 'index'])->name('perfiles.index')->middleware('admin');
 
-Route::get('/perfil/{id}', [perfilController::class, 'show'])->middleware('auth')->name('perfil.show');
+
+Route::get('/estadisticas', [perfilController::class, 'mostrar'])->middleware('auth')->name('estadisticas.mostrar');
+
+Route::get('/Visualizarperfil/{id}', [perfilController::class, 'showperfil'])->middleware('admin')->name('perfil.showperfil');
+
+Route::get('/perfil/{id}', [perfilController::class, 'show'])->middleware(['auth','user'])->name('perfil.show');
 
 Route::post('/guardarPerfil/{id}', [perfilController::class, 'store'])->name('perfil.store');
 
@@ -60,6 +67,7 @@ Route::post('login', function () {
     if (Auth::attempt($credentials)) {
         return redirect('/dashboard');
     }
+    toastr()->error('Datos ingresados incorrectos', ['timeOut' => 5000], 'Cuidado');
     return redirect('/');
 });
 

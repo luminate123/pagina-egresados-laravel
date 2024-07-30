@@ -21,12 +21,14 @@ class datos_profesionalesController extends Controller
                 'puesto_actual' => 'nullable|string',
                 'sector_empresa_actual' => 'nullable|string',
                 'redes_sociales' => 'nullable|string',
-                'curriculum' => 'required|unique:datos_profesionales',
+                'curriculum' => 'nullable|unique:datos_profesionales',
             ]
         );
 
+        // Intentar obtener el curriculum existente para el usuario
         $curriculum = Curriculms::where('id_usuario', $id)->first();
-        $curriculumID = $curriculum->id;
+        $curriculumID = $curriculum ? $curriculum->id : null; // Usar el ID del curriculum si existe, de lo contrario null
+
 
         $datos_profesionales = Datos_profesionales::create([
             'id_usuario' => $id,
@@ -37,7 +39,7 @@ class datos_profesionalesController extends Controller
             'redes_sociales' => $request->redes_sociales,
             'curriculum' => $curriculumID,
         ]);
-
+        toastr()->success('Datos profesionales guardados', ['timeOut' => 5000], 'Exitoso');
         return redirect()->route('perfil.show', ['id' => $id])->with('success2', 'Perfil actualizado correctamente.');
     }
 
@@ -52,8 +54,12 @@ class datos_profesionalesController extends Controller
                 'puesto_actual' => 'sometimes|required|string',
                 'sector_empresa_actual' => 'sometimes|required|string',
                 'redes_sociales' => 'sometimes|required|string',
+                'curriculum' => 'sometimes|required|string',
             ]
         );
+
+
+
         // Retornar errores de validación si existen
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
@@ -63,6 +69,9 @@ class datos_profesionalesController extends Controller
         if (!$datos_profesionales) {
             return response()->json(['message' => 'No se encontró el registro'], 404);
         }
+        // Intentar obtener el curriculum existente para el usuario
+        $curriculum = Curriculms::where('id_usuario', $id)->first();
+        $curriculumID = $curriculum ? $curriculum->id : null; // Usar el ID del curriculum si existe, de lo contrario null
 
         $perfil = Perfil::where('id_usuario', $id)->first();
         $datos_profesionales->update([
@@ -71,9 +80,10 @@ class datos_profesionalesController extends Controller
             'puesto_actual' => $request->puesto_actual,
             'sector_empresa_actual' => $request->sector_empresa_actual,
             'redes_sociales' => $request->redes_sociales,
+            'curriculum' => $curriculumID,
         ]);
-
-        return redirect()->route('perfil.show', ['id' => $perfil->id])->with('success2', 'Perfil actualizado correctamente.');
+        toastr()->success('Datos profesionales actualizados', ['timeOut' => 5000], 'Exitoso');
+        return redirect()->route('perfil.show', ['id' => $id])->with('success2', 'Perfil actualizado correctamente.');
     }
 
     public function upload(Request $request, $id)
@@ -106,6 +116,6 @@ class datos_profesionalesController extends Controller
             return redirect()->route('perfil.show', ['id' => $id])->with('success1', 'Perfil actualizado correctamente.');
         }
 
-        return response()->json(['message' => 'Error al subir el archivo'], 500);
+        return response()->json(['message' => 'Error al subir el archivo100'], 500);
     }
 }

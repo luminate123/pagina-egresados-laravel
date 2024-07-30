@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../path/to/src/pagedone.css" />
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <title>Document</title>
 </head>
 
@@ -64,6 +64,18 @@
                                 <span class="ml-2 text-sm tracking-wide truncate">Bolsa de Trabajo</span>
                             </a>
                         </li>
+                        @if (Auth::user()->role == 'admin')
+                        <li>
+                            <a href="/estadisticas" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 pr-6 {{ Request::is('estadisticas') ? 'border-indigo-500' : 'border-transparent' }}">
+                                <span class="inline-flex justify-center items-center ml-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line" viewBox="0 0 16 16">
+                                        <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1zm1 12h2V2h-2zm-3 0V7H7v7zm-5 0v-3H2v3z" />
+                                    </svg>
+                                </span>
+                                <span class="ml-2 text-sm tracking-wide truncate">Estadisticas</span>
+                            </a>
+                        </li>
+                        @endif
                     </div>
 
                     <div>
@@ -74,7 +86,7 @@
                         </li>
                         @if (Auth::user()->role == 'admin')
                         <li>
-                            <a href="/perfiles" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 pr-6 {{ Request::is('perfil') ? 'border-indigo-500' : 'border-transparent ' }}">
+                            <a href="/perfiles" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 pr-6 {{ Request::is('perfiles') ? 'border-indigo-500' : 'border-transparent ' }}">
                                 <span class="inline-flex justify-center items-center ml-4">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>

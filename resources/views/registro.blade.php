@@ -17,11 +17,12 @@
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             @csrf
-            <form class="space-y-6" method="POST" id="dniForm">
+            <form class="space-y-6" method="POST" action="{{ route('usuarios.store') }}">
+                @csrf
                 <div class="grid">
                     <label for="dni" class="block text-sm font-medium leading-6 text-gray-900">Ingrese su dni</label>
                     <div class="relative mt-2">
-                        <input id="dni" name="dni" type="text" required maxlength="8" class="bg-white block w-full pl-3 rounded-md border-0 py-1.5 text-sky-800 shadow-sm ring-1 ring-insetfocus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <input id="dni" name="DNI" type="text" required maxlength="8" class="bg-white block w-full pl-3 rounded-md border-0 py-1.5 text-sky-800 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         <div id="loading" class="absolute inset-y-0 right-5 flex items-center hidden">
                             <div class="border-gray-300 h-6 w-6 animate-spin rounded-full border-4 border-t-blue-600" role="status"></div>
                         </div>
@@ -32,19 +33,19 @@
                     <div class="grid">
                         <label for="Nombres" class="block text-sm font-medium leading-6 text-gray-900">Nombres</label>
                         <div class="mt-2">
-                            <input id="Nombres" name="Nombres" disabled type="text" placeholder="" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input id="Nombres" name="nombres" disabled type="text" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div class="grid">
                         <label for="ApellidoPaterno" class="block text-sm font-medium leading-6 text-gray-900">Apellido Paterno</label>
                         <div class="mt-2">
-                            <input id="ApellidoPaterno" name="ApellidoPaterno" disabled type="text" placeholder="" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input id="ApellidoPaterno" name="Apellido_Paterno" disabled type="text" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div class="grid mt-6">
                         <label for="ApellidoMaterno" class="block text-sm font-medium leading-6 text-gray-900">Apellido Materno</label>
                         <div class="mt-2">
-                            <input id="ApellidoMaterno" name="ApellidoMaterno" disabled type="text" placeholder="" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input id="ApellidoMaterno" name="Apellido_Materno" disabled type="text" required class="bg-white block w-full pl-5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                 </div>
@@ -53,6 +54,7 @@
                     <button id="submitBtn" type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Registrate</button>
                 </div>
             </form>
+
 
             <p class="mt-10 text-center text-sm text-gray-500">
                 ¿Ya tienes una cuenta?
@@ -126,62 +128,6 @@
                 }
             });
         }
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const dni = document.getElementById('dni').value;
-            const nombres = document.getElementById('Nombres').value;
-            const apellidoPaterno = document.getElementById('ApellidoPaterno').value;
-            const apellidoMaterno = document.getElementById('ApellidoMaterno').value;
-
-            const data = {
-                DNI: dni,
-                nombres: nombres,
-                Apellido_Paterno: apellidoPaterno,
-                Apellido_Materno: apellidoMaterno
-            };
-            fetch('/api/usuarios', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Registro exitoso:', data);
-                    if (data.status === "success") {
-                        showToast();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al registrar:', error);
-                    showToasterror();
-                });
-
-            function showToast() {
-                const toast = document.getElementById('toast-success');
-                toast.style.display = 'flex'; // Mostrar el toast
-                setTimeout(() => {
-                    toast.style.display = 'none'; // Ocultar el toast después de 3 segundos
-                }, 3000);
-            }
-
-            function showToasterror() {
-                const toast = document.getElementById('toast-danger');
-                toast.style.display = 'flex'; // Mostrar el toast
-                setTimeout(() => {
-                    toast.style.display = 'none'; // Ocultar el toast después de 3 segundos
-                }, 3000);
-            }
-
-        });
     });
 </script>
 

@@ -1,7 +1,7 @@
 <x-layout>
     @if (Auth::user()->role == 'admin')
     <!-- Contenido solo para administradores -->
-    <p>Bienvenido, administrador.</p>
+    <p class="text-4xl font-bold mb-4">Bienvenido administrador</p>
     <x-formEmpleo>
     </x-formEmpleo>
     @else

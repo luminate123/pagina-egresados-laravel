@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css'])
     <title>Document</title>
 </head>
 
@@ -48,7 +48,7 @@
                     </div>
                     <div class='buttons mt-8 flex gap-4'>
                         <button type="submit" class="button bg-blue-700 text-white rounded-md px-3 py-1.5 text-sm font-semibold leading- shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="/">Inicia Sesión</button>
-                        <a class="button bg-yellow-600 text-white rounded-md px-3 py-1.5 text-sm font-semibold leading- shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600" href="/registro">Registrate</a>
+                        <a class="button bg-yellow-600 text-white rounded-md px-3 py-1.5 text-sm font-semibold leading- shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600" href="registro">Registrate</a>
                     </div>
                 </div>
             </div>

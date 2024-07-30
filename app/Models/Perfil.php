@@ -15,6 +15,8 @@ class Perfil extends Model
         'id_usuario',
         'fecha_nacimiento',
         'genero',
+        'telefono',
+        'correo',
         'nacional',
     ];
     

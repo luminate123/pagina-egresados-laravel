@@ -25,7 +25,7 @@ class certificadoController extends Controller
             'nombre' => $request->nombrecer,
             'descripcion' => $request->descripcioncer,
         ]);
-
+        toastr()->success('Certificado añadido satisfactoriamente', ['timeOut' => 5000], 'Exitoso');
         return redirect()->route('perfil.show', ['id' => $id])->with('success3', 'Certificado agregado correctamente.');
     }
 
@@ -37,6 +37,7 @@ class certificadoController extends Controller
         $certificado->delete();
 
         // Redirige a una ruta deseada después de eliminar el certificado
+        toastr()->info('Certificado eliminado', ['timeOut' => 5000], 'Eliminado');
         return redirect()->route('perfil.show', ['id' => $id_usuario])->with('success3', 'Certificado eliminado correctamente.');
     }
 }

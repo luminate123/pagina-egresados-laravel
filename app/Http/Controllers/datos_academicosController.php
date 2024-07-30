@@ -25,7 +25,7 @@ class datos_academicosController extends Controller
 
         // Retornar errores de validación si existen
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
+            return back()->with('error', 'Error al guardar los datos academicos.');
         }
 
         // Verificar si ya existe un registro con el mismo id_usuario
@@ -42,7 +42,7 @@ class datos_academicosController extends Controller
             'maestria' => $request->maestria,
             'doctorado' => $request->doctorado,
         ]);
-
+        toastr()->success('Datos academicos guardados', ['timeOut' => 5000], 'Exitoso');
         return redirect()->route('perfil.show', ['id' => $id])->with('success1', 'Perfil actualizado correctamente.');
     }
 
@@ -79,7 +79,7 @@ class datos_academicosController extends Controller
             'maestria' => $request->maestria,
             'doctorado' => $request->doctorado,
         ]);
-
-        return redirect()->route('perfil.show', ['id' => $perfil->id])->with('success1', 'Perfil actualizado correctamente.');
+        toastr()->success('Datos academicos actualizados', ['timeOut' => 5000], 'Exitoso');
+        return redirect()->route('perfil.show', ['id' => $id])->with('success1', 'Perfil actualizado correctamente.');
     }
 }

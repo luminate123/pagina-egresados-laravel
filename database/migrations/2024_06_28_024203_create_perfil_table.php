@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
             $table->date('fecha_nacimiento');
             $table->string('genero');
+            $table->string('telefono');
+            $table->string('correo');
             $table->string('nacional');
 
             $table->timestamps();

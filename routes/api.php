@@ -10,14 +10,13 @@ use App\Http\Controllers\datos_academicosController;
 use App\Http\Controllers\datos_profesionalesController;
 use App\Http\Controllers\certificadoController;
 
-Route::get('/usuarios', [usuariosController::class, 'index']);
 
 Route::get('/usuarios/{id}', function () {
     return 'Obteniendo un estudiante';
 });
 
 
-Route::post('/usuarios', [usuariosController::class, 'store']);
+
 
 
 Route::patch('/usuarios/{id}', function () {
@@ -35,7 +34,7 @@ Route::get('/empleos', [empleosController::class, 'index']);
 Route::get('/empleos/{id}', function () {
     return 'Obteniendo un empleo';
 });
-Route::post('/registroempleo', [empleosController::class, 'store']);
+
 
 
 

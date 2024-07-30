@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->text('descripcion');
-            $table->date('fecha_publicacion');
+            $table->string('imagen');
             $table->text('link');
             $table->timestamps();
         });

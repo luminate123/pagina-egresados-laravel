@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curriculms;
+use App\Models\Datos_profesionales;
 use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\Request;
 
 class curriculumsController extends Controller
@@ -12,7 +14,7 @@ class curriculumsController extends Controller
     {
         // Validar el archivo y otros campos
         $request->validate([
-            'curriculum' => 'required|file|mimes:pdf,doc,docx',
+            'curriculum' => 'required|file|mimes:pdf',
         ]);
 
         if ($request->file('curriculum')->isValid()) {
@@ -42,6 +44,18 @@ class curriculumsController extends Controller
                     'id_usuario' => $id,
                     'path' => $path
                 ]);
+                // Buscar o crear el registro en Datos_academicos
+                $datos_academicos = Datos_profesionales::firstOrCreate(
+                    ['id_usuario' => $id],
+                    ['curriculum' => Curriculms::where('id_usuario', $id)->first()->id]
+                );
+
+                // Si el registro ya existe, actualizar el campo 'curriculum'
+                if (!$datos_academicos->wasRecentlyCreated) {
+                    $datos_academicos->update([
+                        'curriculum' => Curriculms::where('id_usuario', $id)->first()->id,
+                    ]);
+                }
             }
 
             return response()->json(['message' => 'Archivo subido exitosamente', 'path' => $path], 200);
